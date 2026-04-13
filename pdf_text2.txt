@@ -1,0 +1,55 @@
+--- RSCU_formula.pdf ---
+The Relative Synonymous Codon Usage (RSCU) is the ratio of the observed frequency of 
+a codon to the expected frequency if all synonymous codons for that amino acid were used 
+equally. 
+𝑅𝑆𝐶𝑈 =  𝑂
+𝐸
+ 
+Where: 
+• O (Observed): The actual count of the specific codon in the gene. 
+• E (Expected): The total count of the amino acid divided by the number of 
+synonymous codons for that amino acid. 
+The formula to calculate the Expected value is: 
+𝐸 =  𝑇𝑜𝑡𝑎𝑙 𝑐𝑜𝑢𝑛𝑡 𝑜𝑓 𝑡ℎ𝑒 𝐴𝑚𝑖𝑛𝑜 𝐴𝑐𝑖𝑑
+𝑁𝑢𝑚𝑏𝑒𝑟 𝑜𝑓 𝑆𝑦𝑛𝑜𝑛𝑦𝑚𝑜𝑢𝑠 𝐶𝑜𝑑𝑜𝑛𝑠 
+ 
+Step-by-Step Logic 
+To implement this in a program, use these three steps: 
+1. Count the Codon: How many times does this specific codon (e.g., GCT) appear? 
+2. Count the Amino Acid: How many times do all codons for this amino acid (e.g., 
+GCT, GCC, GCA, GCG) appear in total? 
+3. Number of Synonymous Codons: How many different codons code for this 
+specific amino acid? (e.g., Alanine has 4). 
+ 
+Example 
+If these were the counts for the four Alanine codons: 
+Codon Count 
+GCT 135 
+GCC 45 
+GCA 115 
+GCG 85 
+ 
+Then the RSCU for GCT would be 1.42. 
+Observed (O): 135 
+Total of all Alanine codons observed: 380 (135+45+115+85) 
+Synonymous Codons: 4 (There are 4 codons that code for Alanine) 
+So Expected (E) = 380 / 4 → 95 
+RSCU = O / E → 135/95 = 1.42 
+ 
+RSCU Value Meaning 
+An RSCU value of 1.0 indicates no bias (the codon is used exactly as often as expected by 
+chance). Values > 1.0 indicate a preferred codon, and values < 1.0 indicate an unfavored 
+codon. 
+ 
+RSCU Categories 
+For the purposes of the project, we will use the following category labels for the RSCU 
+values. 
+Category RSCU range 
+Highly Unfavored < .6 
+Unfavored [.6, .9) 
+Stable [0.9, 1.10] 
+Favored (1.10, 1.6] 
+Highly Favored > 1.6 
+ 
+
+

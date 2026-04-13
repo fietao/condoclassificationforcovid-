@@ -1,0 +1,144 @@
+--- lab09-definitions.pdf ---
+ 
+ 
+GENOME DEFINITIONS* 
+Used for Codon Bias Assignment.  
+* Short definition of terms. Please note that all of these have a lot more nuanced detail 
+about them.  
+ 
+Nucleotide: Building blocks of DNA molecules. For DNA, there are 4: A, T, 
+C, and G. 
+Codon: A group of 3 nucleotides. Together, those 3 letters code for a 
+specific amino acid. 
+Amino Acid: A building block of a protein and is usually represented as a 
+single letter. An amino acid can be created via several different codons. A 
+protein is represented as a string of amino acids. 
+Codon Mapping: *See the chart on the next page for a graphic of the 64 
+codons and how those map to the 20 amino acids. 
+Protein: A functional, 3D structure made by linking together a long chain of 
+amino acids. 
+Genome: The entire DNA sequence of an organism. 
+Replicase (Region): A large section of the viral genome that codes for the 
+"machinery" that the virus needs to copy itself. 
+Spike Protein (Region): The part of the viral genome that codes for the 
+"spikes" on the outside of the virus. This protein is what the human immune 
+system sees.  
+Synonymous Codons: Two or more different codons that code for the 
+exact same amino acid. For example, GCT, GCC, GCA, and GCG are all 
+"synonyms" because they all result in Alanine. 
+ 
+ 
+2 
+Codon Bias: As an amino acid can be created via multiple different codons, 
+this is the analysis to determine which of the codons an organism seems to 
+use more frequently in their DNA structure to create a specific amino acid. 
+RSCU (Relative Synonymous Codon Usage) A standardized 
+mathematical score used to measure codon bias. 
+• 1.0 means the codon is used exactly as often as expected (no bias). 
+• Greater than 1.0 means the codon is "Preferred." 
+• Less than 1.0 means the codon is "Avoided." 
+ 
+Codon to Amino Acid Mapping: 
+ 
+
+
+
+--- rscu-project-plan.pdf ---
+LAB 9 PROJECT PLAN HELP (IF NEEDED) 
+NOTES 
+A. Be sure to test as you go along! Just try printing what you have to the screen or 
+something to make sure that your section actually has the data you are expecting. 
+Do not wait to try to run it until all of the pieces are there! 
+ 
+B. I'd strongly suggest writing this program for H1N1 first, since you have all of my 
+FASTA files and example output. Then when that works, just change the filenames 
+to be the covid ones. 
+ 
+ 
+Here are tasks that need to be done that have dependencies, and tasks that can be 
+done concurrently. 
+ 
+CONCURRENT 1 
+ 
+The CodonEntry ArrayList has to be built first from the codons.csv file. No one can get any 
+real work done without that. 
+ 
+A. You'll need the CodonEntry class built. The suggested attributes are in the 
+requirements document.  
+ 
+B. In Main, write a method to read in the codons.csv file and split it. Every line in the 
+file is one codon, so make an instance of a CodonEntry class, fill it with the data, 
+and then add it to an ArrayList of CodonEntries. 
+ 
+C. Write a method to parse the two fasta files. Remember those are just a long string of 
+characters. You'll need to create the logic to move through the sequence string 3 
+characters at a time (which represents a codon), find the corresponding 
+CodonEntry in your list, and increment the count for that region (Replicase or Spike) 
+(or h1n1-pb1 and h1n1-ha if you're writing against H1N1 first. pb1 is the replicase of 
+flu and ha is the spike equivalent(ish)) 
+ 
+a. There are several ways you could tackle this. You could read the file in its 
+entirety, breaking out all of the codons and close the file. Then you'd use the 
+list of codons – loop through them all and update your counts. For example, 
+if the first codon you read was AAT, find AAT in your list of CodonEntry and 
+increment its count 
+b. Or, you could read a codon, find it in the list, update the count, and then read 
+the next codon. 
+ 
+ 
+With those necessities out of the way (items everyone will need), you can start 
+working on the bigger functionality. 
+ 
+ 
+SERIAL WORK (DONE IN ORDER) 
+A. Math Logic: Calculate the total count for each Amino Acid family, then apply the 
+RSCU formula 
+𝑅𝑆𝐶𝑈 =  𝑂
+𝐸 
+to each codon. Everyone should read/use the RSCU_formula.pdf for information on 
+this calculation. Remember, you also have my output files from H1N1 to see what 
+the numbers look  like. 
+B. Those RSCU values need to be updated in your ArrayList<CodonEntry> for each 
+codon 
+CONCURRENT 2  
+ 
+A. Someone generate the replicase_rscu.csv and spike_rscu.csv files. If you can get 
+the first one to work, the second one is nearly identical. 
+ 
+B. Someone start writing the logic for the creation of the rscu_comparison.csv. Get the 
+first five columns working from the lab requirements. 
+ 
+C. Someone:  
+A. write a method logic to calculate the RSCU differences between the replicase 
+and spike RSCU values for each CodonEntry 
+B. create a method that determines the correct category (highly favored – highly 
+unfavored) when given an RSCU value 
+ 
+SERIAL WORK (DONE IN ORDER) 
+A. With B and C complete above, write the logic in Main to combine them. Add the 
+RSCU difference and the favored categorization for replicase and spike to the csv. 
+ 
+CONCURRENT 3 
+A. Once complete, write the logic to determine whether the last report column should 
+be UP, DOWN, or left blank and add that to your csv. 
+B. Start working on the final report (spike_favored.txt) format. You should be able to 
+get at least the layout looking good, even if you don't yet know the ones that will 
+print for UP or DOWN yet. 
+ 
+LAST PARTS 
+ 
+Now that you have a complete rscu_comparison.csv file, use it to determine which 
+columns have UP or DOWN and complete your spike_favored.txt report 
+ 
+NOTE: If you've taken my advice to write this project against H1N1 first, double check that 
+all of your reports look like mine. If they do, update your project to now use the covid 
+replicase and spike files instead. 
+ 
+Zip up all of your code, csv files, and report. Upload the zip to Canvas. Only one member of 
+your team needs to submit. Don't forget to then do Part B of the lab. 
+ 
+ 
+I hope this helps! It's not every detail of course, but it might help you break out the 
+work to be done. 
+
+
