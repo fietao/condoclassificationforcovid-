@@ -5,21 +5,23 @@ import java.util.Scanner;
 public class CodonEntry {
     private String codon_sequence;
     private String amino_acid_name;
+
     private char amino_acid_symbol;
     private int codon_number;
     private int condon_spike;
-    private int RSU_replicase;
-    private int RSU_spike;
 
+    private double RSU_replicase;
+    private double RSU_spike;
+    
     public CodonEntry(String codon_sequence, String amino_acid_name, char amino_acid_symbol, int codon_number,
-            int condon_spike, int RSU_replicase, int RSU_spike) {
+            int condon_spike, double RSU_replicase, double RSU_spike) {
         this.codon_sequence = codon_sequence;
         this.amino_acid_name = amino_acid_name;
         this.amino_acid_symbol = amino_acid_symbol;
         this.codon_number = codon_number;
         this.condon_spike = condon_spike;
-        this.RSU_replicase = RSU_replicase;
-        this.RSU_spike = RSU_spike;
+        this.RSU_replicase = 0.00;
+        this.RSU_spike = 0.00;
     }
 
     public String getCodonSequence() {
@@ -62,19 +64,19 @@ public class CodonEntry {
         this.condon_spike = condon_spike;
     }
 
-    public int getRSUReplicase() {
+    public double getRSUReplicase() {
         return RSU_replicase;
     }
 
-    public void setRSUReplicase(int RSU_replicase) {
+    public void setRSUReplicase(double RSU_replicase) {
         this.RSU_replicase = RSU_replicase;
     }
 
-    public int getRSUSpike() {
+    public double getRSUSpike() {
         return RSU_spike;
     }
 
-    public void setRSUSpike(int RSU_spike) {
+    public void setRSUSpike(double RSU_spike) {
         this.RSU_spike = RSU_spike;
     }
 }
