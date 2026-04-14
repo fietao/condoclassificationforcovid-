@@ -3,14 +3,25 @@
 ## Overview
 This project analyzes Relative Synonymous Codon Usage (RSCU) for biological sequences, specifically focusing on replicase and spike protein genes.
 
-## Files
+## Project Structure
 
-- **replicase.fasta** - FASTA sequence for replicase protein
-- **spike.fasta** - FASTA sequence for spike protein
-- **codons.csv** - Codon frequency data
-- **RSCU_formula.pdf** - Documentation of RSCU calculation formula
-- **lab09-definitions.pdf** - Definitions and terminology
-- **rscu-project-plan.pdf** - Project planning document
+- **src/** - Java source files
+	- **Main.java**
+	- **CodonEntry.java**
+- **data/** - Input biological datasets
+	- **replicase.fasta**
+	- **spike.fasta**
+	- **codons.csv**
+- **docs/reference/** - Assignment and reference PDFs
+	- **RSCU_formula.pdf**
+	- **lab09-definitions.pdf**
+	- **rscu-project-plan.pdf**
+- **docs/notes/** - Extracted notes and planning text
+	- **pdf_text.txt**
+	- **pdf_text2.txt**
+	- **roadmap**
+- **diagrams/** - Project diagrams
+	- **Untitled Diagram.drawio**
 
 ## Project Description
 
@@ -22,4 +33,4 @@ This assignment involves calculating and analyzing codon usage bias in viral pro
 
 ## Usage
 
-Analyze the provided FASTA sequences and codon data according to the specifications in the project documentation.
+Use the input files in **data/** and the reference material in **docs/reference/** to analyze codon usage according to the assignment specifications.
