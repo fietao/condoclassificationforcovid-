@@ -2,10 +2,7 @@ import java.util.Scanner;
 import java.io.*;
 import java.util.ArrayList;
 
-/**
- * Main class for processing DNA sequences and analyzing codon usage in replicase and spike proteins.
- * Reads codon definitions from a CSV file and FASTA sequences, then counts codon occurrences.
- */
+
 public class Main {
 
     /**
@@ -90,7 +87,7 @@ public class Main {
             String codon = finalSequence.substring(i, i + 3);
             for (CodonEntry entry : codonList) {
                 if (entry.getCodonSequence().equals(codon)) {
-                    entry.setCodonNumber(entry.getCodonNumber() + 1);
+                    entry.setCondonSpike(entry.getCondonSpike() + 1);
                     break;
                 }
             }
