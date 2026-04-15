@@ -1,27 +1,42 @@
-# Project Roadmap: SARS-CoV-2 RSCU Analysis
+PHASE 1 — Understand the inputs (before writing a single line)
 
-## ✅ Phase 1: Reading Data
-- [x] **Load Codons**: Read `codons.csv` into a list of `CodonEntry` objects.
-- [x] **Load DNA**: Read both FASTA files and strip the header lines.
+Read lab09-definitions.pdf so you know what RSCU, codon bias, synonymous codons, etc. actually mean
+Read RSCU_formula.pdf so you know the exact math + the category labels (Favored / Neutral / etc.)
+Open codons.csv and understand its structure — 3 columns: codon sequence, amino acid full name, single-letter code
+Open both .fasta files and understand the format — there's a header line starting with >, then raw nucleotide sequence
 
-## ✅ Phase 2: Counting Codons
-- [x] **countTriplets**: Loop through DNA 3 letters at a time and increment `codon_number` (replicase) or `condon_spike` (spike) on each matching entry.
 
-## 🔜 Phase 3: RSCU Math (Your Turn)
-Implement `calculateRSCU` in [CodonEntry.java](CodonEntry.java).
+PHASE 2 — Design your classes (on paper first)
 
-For each unique amino acid symbol in `allSymbols`:
-1. Count how many codons share that symbol → **ni** (number of synonyms)
-2. Sum all counts for that symbol → **sumRep**, **sumSpike**
-3. For each codon with that symbol:
-   - `RSU_replicase = (codon_number * ni) / sumRep`  ← only if sumRep > 0
-   - `RSU_spike     = (condon_spike  * ni) / sumSpike` ← only if sumSpike > 0
+Design CodonEntry — it holds: codon sequence, AA name, AA letter, replicase count, spike count, replicase RSCU, spike RSCU
+Decide what methods your Main class needs — rough list:
 
-## 🔜 Phase 4: Output (Your Turn)
-Write `saveCSV` in [Main.java](Main.java) and call it at the end of `main`.
+parseFasta(filename) → returns cleaned nucleotide string
+splitIntoCodons(sequence) → returns list of 3-letter codon strings
+loadCodons(csvFile) → builds your list of CodonEntry objects
+countCodons(codonList, entries) → fills in the counts
+calculateRSCU(entries, region) → runs the RSCU formula
+writeCSV(entries, filename, region) → outputs the csv files
+writeComparison(entries) → outputs the comparison csv
+writeFavoredReport(entries) → outputs spike_favored.txt
 
-The output file `rscu_comparison.csv` should have this header:
-```
-Codon,Code,RepRSU,SpikeRSU,Diff
-```
-Then one row per `CodonEntry` with `codon_sequence`, `amino_acid_symbol`, `RSU_replicase`, `RSU_spike`, and the difference (`RSU_spike - RSU_replicase`).
+
+
+
+PHASE 3 — Build incrementally
+
+Write CodonEntry first — just the fields and a constructor
+Write loadCodons() — read the CSV, create one CodonEntry per row, store in an ArrayList
+Write parseFasta() — strip the > header line, concatenate remaining lines, uppercase everything
+Write splitIntoCodons() — loop through the string 3 chars at a time
+Write countCodons() — for each codon string you split out, find the matching CodonEntry and increment its count
+Write calculateRSCU() — group entries by amino acid, apply the formula from the PDF
+Test against H1N1 first (pb1 = replicase, ha = spike) — match the provided sample output before touching COVID data
+
+
+PHASE 4 — Output generation
+
+Write replicase_rscu.csv — 7 columns per the spec
+Write spike_rscu.csv — same 7 columns
+Write rscu_comparison.csv — 9 columns, including UP/DOWN column
+Write spike_favored.txt — UP codons first, then DOWN codons, with the 4 required fields each
