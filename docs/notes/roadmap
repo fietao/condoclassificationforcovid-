@@ -1,0 +1,59 @@
+Here's everything consolidated as plain text you can copy into your own doc:
+
+Lab 09 — COVID-19 RSCU Analysis COSC 1437, Prof. Clark | Java Bioinformatics Project
+
+PHASE 0 — Read Everything First (Serial)
+Read lab09-definitions.pdf — know what RSCU, codon bias, and synonymous codons mean before touching code.
+Read RSCU_formula.pdf — understand RSCU = O/E, how to compute E, and the category labels (Highly Favored through Highly Disfavored).
+Inspect codons.csv — 3 columns: codon sequence, amino acid full name, single-letter code. 64 rows. One row = one CodonEntry.
+Inspect both .fasta files — header line starts with >, everything else is raw nucleotides. Strip header, concat lines, uppercase all.
+
+PHASE 1 — Design on Paper First (Serial)
+Design CodonEntry — fields: codon sequence, AA name, AA letter, replicase count, spike count, replicase RSCU, spike RSCU.
+Map out all Main methods before writing any code: loadCodons(), parseFasta(), splitIntoCodons(), countCodons(), calculateRSCU(), writeCSV(), writeComparison(), writeFavoredReport().
+
+PHASE 2 — Build Foundations (Concurrent — split across teammates)
+Teammate 1: Build CodonEntry class — just fields, constructor, getters/setters. No logic yet.
+Teammate 2: Write loadCodons() — read codons.csv, split each line, instantiate one CodonEntry per row, add to ArrayList.
+Teammate 3: Write parseFasta() + splitIntoCodons() — strip > header, concat + uppercase lines, then loop 3 chars at a time.
+
+PHASE 3 — Counting + RSCU Math (Serial)
+Write countCodons() — for each codon string from parseFasta(), find the matching CodonEntry and increment replicaseCount or spikeCount. (Depends on all of Phase 2)
+Write calculateRSCU() — group entries by amino acid, compute family total count, apply RSCU = O/E, store result back in CodonEntry. (Depends on 3A)
+
+PHASE 4 — Validate with H1N1 (Serial)
+Run your program against H1N1 files — pb1 = replicase equivalent, ha = spike equivalent.
+Compare your output to the professor's provided sample files. Match column headers, RSCU values, favored categories, and UP/DOWN logic exactly. Fix everything before moving to COVID data.
+
+PHASE 5 — Generate Output Files (Concurrent)
+replicase_rscu.csv — 7 columns: codon, AA name, AA letter, codon count, family total count, percentage, RSCU value.
+spike_rscu.csv — same 7 columns, using spike counts.
+rscu_comparison.csv — 9 columns: codon, AA name, AA letter, replicase RSCU, spike RSCU, difference (spike − replicase), replicase category, spike category, UP/DOWN.
+spike_favored.txt — list UP codons first then DOWN codons; each entry has codon, amino acid, replicase category, spike category.
+
+PHASE 6 — Finalize and Submit (Serial)
+Swap all filenames from H1N1 to replicase.fasta and spike.fasta. Rerun everything.
+Add Javadoc to every class and method. Add inline comments on any complex math or loop logic.
+Zip and upload to Canvas: all .java source files + replicase_rscu.csv + spike_rscu.csv + rscu_comparison.csv + spike_favored.txt.
+
+Key Formulas
+RSCU = O / E
+E = (total count of all codons for that amino acid) / (number of synonymous codons for that amino acid)
+UP = category becomes more favored going from replicase → spike
+DOWN = category becomes less favored going from replicase → spike
+Blank = no category change
+
+Submission Checklist
+Read definitions and formula PDFs
+Designed classes before coding
+CodonEntry built with all 7 fields
+loadCodons() working
+parseFasta() + splitIntoCodons() working
+countCodons() correctly incrementing both regions
+calculateRSCU() applying O/E formula correctly
+H1N1 output matches professor's sample exactly
+All 4 output files generated
+Filenames swapped to COVID data
+Javadoc on everything
+ZIP submitted to Canvas
+
